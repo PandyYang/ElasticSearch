@@ -103,3 +103,4 @@ project-dependencies.png
 
 *.lock
 *.bin
+*.class
