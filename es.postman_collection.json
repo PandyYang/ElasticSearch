@@ -1,0 +1,1102 @@
+{
+	"info": {
+		"_postman_id": "7ae55e83-0569-4ceb-94f9-f98443eb80fd",
+		"name": "es",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "索引增删改查",
+			"item": [
+				{
+					"name": "127.0.0.1:9200/shopping",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:9200/shopping",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"shopping"
+							]
+						},
+						"description": "创建索引"
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:9200/_cat/indices?v",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:9200/_cat/indices?v",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"_cat",
+								"indices"
+							],
+							"query": [
+								{
+									"key": "v",
+									"value": null
+								}
+							]
+						},
+						"description": "查看所有索引"
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:9200/shopping",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:9200/shopping",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"shopping"
+							]
+						},
+						"description": "查看索引状态\r\n"
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:9200/shopping",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:9200/shopping",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"shopping"
+							]
+						},
+						"description": "删除索引\r\n"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "文档增删改查",
+			"item": [
+				{
+					"name": "聚合查询",
+					"item": [
+						{
+							"name": "127.0.0.1:9200/shopping/_search",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"aggs\": { // 聚合操作\r\n        \"price_group\": { // 名称\r\n            \"terms\": { // 分组\r\n                \"field\": \"price\"\r\n            }\r\n        }\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "127.0.0.1:9200/shopping/_search",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "9200",
+									"path": [
+										"shopping",
+										"_search"
+									]
+								},
+								"description": "按price字段进行分组\r\n"
+							},
+							"response": []
+						},
+						{
+							"name": "127.0.0.1:9200/shopping/_search",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"aggs\": { // 聚合操作\r\n        \"price_group\": { // 名称\r\n            \"terms\": { // 分组\r\n                \"field\": \"price\"\r\n            }\r\n        }\r\n    },\r\n    \"size\": 0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "127.0.0.1:9200/shopping/_search",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "9200",
+									"path": [
+										"shopping",
+										"_search"
+									]
+								},
+								"description": "按price分组,不带返回值"
+							},
+							"response": []
+						},
+						{
+							"name": "127.0.0.1:9200/shopping/_search",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"aggs\": { // 聚合操作\r\n        \"price_group\": { // 名称\r\n            \"avg\": { // 求平均值\r\n                \"field\": \"price\"\r\n            }\r\n        }\r\n    },\r\n    \"size\": 0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "127.0.0.1:9200/shopping/_search",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "9200",
+									"path": [
+										"shopping",
+										"_search"
+									]
+								},
+								"description": "求手机平均值"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "127.0.0.1:9200/shopping/_doc/1",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"doc\": {\r\n        \"title\": \"小米手机\",\r\n        \"category\": \"小米\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/shopping/_doc/1",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"shopping",
+								"_doc",
+								"1"
+							]
+						},
+						"description": "删除文档"
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:9200/shopping/_search?q=category:小米",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:9200/shopping/_search?q=category:小米",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"shopping",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "category:小米"
+								}
+							]
+						},
+						"description": "查询cate为小米的文档"
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:9200/shopping/_search",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": {\r\n        \"match\": {\r\n            \"category\": \"小米\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/shopping/_search",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"shopping",
+								"_search"
+							]
+						},
+						"description": "请求体的方式查询,match"
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:9200/shopping/_search",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": {\r\n        \"match_all\": {}\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/shopping/_search",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"shopping",
+								"_search"
+							]
+						},
+						"description": "请求体的方式查询所有文档"
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:9200/shopping/_search",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": {\r\n        \"match_all\": {}\r\n    },\r\n    \"_source\": [\"title\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/shopping/_search",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"shopping",
+								"_search"
+							]
+						},
+						"description": "查询指定字段"
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:9200/shopping/_search",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": {\r\n        \"match_all\": {}\r\n    },\r\n    \"from\": 0,\r\n    \"size\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/shopping/_search",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"shopping",
+								"_search"
+							]
+						},
+						"description": "分页查询"
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:9200/shopping/_search",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": {\r\n        \"bool\": {\r\n            \"must\": [\r\n                {\r\n                    \"match\": {\r\n                        \"category\": \"小米\"\r\n                    }\r\n                },\r\n                {\r\n                    \"match\": {\r\n                        \"price\": 3999.00\r\n                    }\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/shopping/_search",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"shopping",
+								"_search"
+							]
+						},
+						"description": "多条件查询"
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:9200/shopping/_search",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": {\r\n        \"bool\": {\r\n            \"should\": [\r\n                {\r\n                    \"match\": {\r\n                        \"category\": \"小米\"\r\n                    }\r\n                },\r\n                {\r\n                    \"match\": {\r\n                        \"category\": \"华为\"\r\n                    }\r\n                }\r\n            ],\r\n            \"filter\": {\r\n                \"range\": {\r\n                    \"price\": {\r\n                        \"gt\": 2000\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/shopping/_search",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"shopping",
+								"_search"
+							]
+						},
+						"description": "bool 和 filter组合查询\r\n"
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:9200/shopping/_search",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": {\r\n       \"match\": {\r\n           \"category\": \"小华\"\r\n       }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/shopping/_search",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"shopping",
+								"_search"
+							]
+						},
+						"description": "分词查询"
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:9200/shopping/_search",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": {\r\n       \"match_phrase\": {\r\n           \"category\": \"为\"\r\n       }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/shopping/_search",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"shopping",
+								"_search"
+							]
+						},
+						"description": "完全匹配"
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:9200/shopping/_search",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": {\r\n       \"match_phrase\": {\r\n           \"category\": \"为\"\r\n       }\r\n    },\r\n    \"highlight\": {\r\n        \"fields\":{\r\n            \"category\": {}\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/shopping/_search",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"shopping",
+								"_search"
+							]
+						},
+						"description": "高亮查询"
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:9200/shopping/_update/1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"doc\": {\r\n        \"title\": \"小米手机\",\r\n        \"category\": \"小米\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/shopping/_update/1",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"shopping",
+								"_update",
+								"1"
+							]
+						},
+						"description": "局部更新"
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:9200/shopping/_doc/1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"华为手机\",\r\n    \"category\":\"华为\",\r\n    \"images\":\"http://www.gulixueyuan.com/hw.jpg\",\r\n    \"price\":1999.00\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/shopping/_doc/1",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"shopping",
+								"_doc",
+								"1"
+							]
+						},
+						"description": "更新文档\r\n"
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:9200/shopping/_search",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"华为手机\",\r\n    \"category\":\"华为\",\r\n    \"images\":\"http://www.gulixueyuan.com/hw.jpg\",\r\n    \"price\":1999.00\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/shopping/_search",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"shopping",
+								"_search"
+							]
+						},
+						"description": "查询全部数据\r\n"
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:9200/shopping/_doc",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n                    \"title\": \"华为手机\",\r\n                    \"category\": \"华为\",\r\n                    \"images\": \"http://www.gulixueyuan.com/xm.jpg\",\r\n                    \"price\": 1999\r\n                }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:9200/shopping/_doc",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"shopping",
+								"_doc"
+							]
+						},
+						"description": "指定版本号"
+					},
+					"response": []
+				},
+				{
+					"name": "127.0.0.1:9200/shopping/_doc/1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:9200/shopping/_doc/1",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "9200",
+							"path": [
+								"shopping",
+								"_doc",
+								"1"
+							]
+						},
+						"description": "文档查询"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "映射关系",
+			"item": [
+				{
+					"name": "localhost:9200/user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/user",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:9200/user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"properties\": {\r\n        \"name\":{\r\n        \t\"type\": \"text\",\r\n        \t\"index\": true\r\n        },\r\n        \"sex\":{\r\n        \t\"type\": \"keyword\",\r\n        \t\"index\": true\r\n        },\r\n        \"tel\":{\r\n        \t\"type\": \"keyword\",\r\n        \t\"index\": false\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/user/_mapping",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"user",
+								"_mapping"
+							]
+						},
+						"description": "创建索引的映射"
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:9200/user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9200/user/_mapping",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"user",
+								"_mapping"
+							]
+						},
+						"description": "查询映射\r\n"
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:9200/user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": {\r\n        \"match\": {\r\n            \"name\": \"小\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/user/_search",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"user",
+								"_search"
+							]
+						},
+						"description": "查询含有小的数据"
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:9200/user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": {\r\n        \"match\": {\r\n            \"sex\": \"男的\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/user/_search",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"user",
+								"_search"
+							]
+						},
+						"description": "sex类型为keyword,所以必须输入男的,才能有数据"
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:9200/user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"query\": {\r\n        \"match\": {\r\n            \"tel\": \"11\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9200/user/_search",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"user",
+								"_search"
+							]
+						},
+						"description": "无法查询tel,因为创建tel时,index属性为false"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "查看集群状态",
+			"item": [
+				{
+					"name": "http://127.0.0.1:1001/_cluster/health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:1001/_cluster/health",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "1001",
+							"path": [
+								"_cluster",
+								"health"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:1001/_cluster/health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:1002/_cluster/health",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "1002",
+							"path": [
+								"_cluster",
+								"health"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "集群操作",
+			"item": [
+				{
+					"name": "http://127.0.0.1:1001/_cluster/health",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:1001/user",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "1001",
+							"path": [
+								"user"
+							]
+						},
+						"description": "在01节点增加索引\r\n"
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:1001/_cluster/health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:1003/user",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "1003",
+							"path": [
+								"user"
+							]
+						},
+						"description": "在三号节点获取索引"
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:1001/_cluster/health",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"settings\": {\r\n        \"number_of_shards\": 3,\r\n        \"number_of_replicas\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:1003/users",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "1003",
+							"path": [
+								"users"
+							]
+						},
+						"description": "创建一个3主分片和1个副本的索引"
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:1001/_cluster/health",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"number_of_replicas\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:1003/users/_settings",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "1003",
+							"path": [
+								"users",
+								"_settings"
+							]
+						},
+						"description": "动态调整副本数目"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
